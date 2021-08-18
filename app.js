@@ -3,6 +3,7 @@ const { sequelize } = require('./models');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+
 require('dotenv').config();
 
 const app = express()
@@ -15,6 +16,7 @@ app.use(express.json())
 app.use('/api/users', require('./routers/userRouter'));
 
 app.use('/api/despachos', require('./routers/despachoRouter'));
+app.use('/api/pedidos-pendiente', require('./routers/pedidosPRouter'));
 
 
 app.listen(process.env.PORT, async () => {

@@ -9,8 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Despacho }) {
+    static associate({ Soul_pedidos }) {
       // this.hasMany(Despacho, { foreignKey: 'usuarioId', as: 'despachos' })
+      this.hasMany(Soul_pedidos, { foreignKey: 'id_usuario' })
     }
 
     toJSON() {
@@ -81,9 +82,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     role: {
-
       type: DataTypes.ENUM('DESPACHO', 'ADMINISTRACION', 'CARTA')
-
     },
     fecha_estado: {
       type: DataTypes.DATEONLY

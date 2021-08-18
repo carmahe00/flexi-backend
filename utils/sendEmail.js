@@ -1,27 +1,37 @@
 const nodemailer = require('nodemailer');
 
+
 const sendEmail = async (email, subject, text) => {
     try {
         const transporter = nodemailer.createTransport({
-            host: process.env.HOST,
-            service: process.env.SERVICES,
-            port: 587,
-            secure: true,
-            auth:{
-                user: process.env.USER,
-                pass: process.env.PASS
+            host: "mail.flexi.com.co",
+            port: 26,
+            secure: false,
+            auth: {
+                user: "flexiusuarios@flexi.com.co",
+                pass: "flexiusuarios"
+            },
+            tls: {
+                rejectUnauthorized: false
             }
         })
 
-        await transporter.sendMail({
-            from: process.env.USER,
+        const template = `
+        <h1>Cambio de la contraseña</h1>
+        <ul>
+            <li>Ingrese al siguiente enlace: <a href="${text}" >link</a></li>
+        </ul>
+        `
+
+        const info = await transporter.sendMail({
+            from: ` FlexiCom <flexiusuarios@flexi.com.co> `,
             to: email,
             subject: subject,
-            text: text
+            html: template
         })
-        console.log("email sent sucessfully");
+        console.log("email sent sucessfully", info.messageId);
     } catch (error) {
-        console.log(error, "email not sent")
+        console.log(error)
     }
 }
 

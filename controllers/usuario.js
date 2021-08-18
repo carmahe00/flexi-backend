@@ -4,9 +4,10 @@ const bcryptjs = require('bcryptjs');
 
 const { generarJWT } = require('../helpers/jwt');
 const sendEmail = require('../utils/sendEmail');
-const { comprobarJWT } = require('../helpers/jwt');
+
 
 const loginUser = async (req = request, res = response) => {
+
     try {
 
         const { email } = req.body
@@ -59,7 +60,7 @@ const getById = async (req, res) => {
         const soul_usuario = await Soul_usuarios.findOne({
             where: { uuid }
         })
-
+        
         return res.json(soul_usuario)
     } catch (error) {
         console.log(error)
@@ -68,10 +69,12 @@ const getById = async (req, res) => {
 }
 
 const passwordReset = async (req = request, res = response) => {
+
     const { email } = req.body
     try {
-        const token = await generarJWT(req.uuid, req.username)
-        const link = `${req.headers.host}/password-reset/${req.uuid}/${token}`
+        const token = await generarJWT(req.uuid, req.login)
+
+        const link = `${req.headers.origin}/password-reset/${req.uuid}/${token}`
         await sendEmail(email, "Cambio de contraseña", link)
 
         return res.json({
@@ -85,16 +88,25 @@ const passwordReset = async (req = request, res = response) => {
     }
 }
 
-const resetPassword = async (req = request, res = response) => {
-    const { password } = req.body.password
-    const { userId, token } = req.params
+const changePassword = async (req = request, res = response) => {
+    const { userId } = req.params
+
     try {
-        const [comprobar, uuid] = comprobarJWT(token)
-        if (comprobar){
-            const user = await Soul_usuarios(userId)
-            
+        const user = await Soul_usuarios.findOne({ where: { uuid: userId } })
+        if (!user) {
+            return res.status(400).json({
+                msg: "Correo no encontrado"
+            })
         }
 
+        let password = bcryptjs.hashSync(req.body.password, 10)
+
+        user.password = password;
+        await user.save()
+
+        return res.json({
+            msg: "Usuario Actualizado"
+        })
 
     } catch (error) {
         console.log(error)
@@ -139,6 +151,20 @@ const updateUser = async (req, res) => {
     }
 }
 
+const renewToken = async (req = request, res = response) => {
+    const { uuid } = req;
+    console.log('acá')
+    
+    const soul_usuario = await Soul_usuarios.findOne({
+        where: { uuid: uuid }
+    })
+    const token = await generarJWT(uuid, soul_usuario.username);
+    res.json({
+        token,
+        soul_usuario
+    })
+}
+
 module.exports = {
     registerUser,
     getUser,
@@ -147,5 +173,7 @@ module.exports = {
     updateUser,
     signIn,
     loginUser,
-    passwordReset
+    passwordReset,
+    changePassword,
+    renewToken
 }

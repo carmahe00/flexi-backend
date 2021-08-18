@@ -5,20 +5,23 @@ const { Soul_usuarios } = require('../models');
 const validarJWT = (req = request, res = response, next) => {
     try {
         const token = req.header('Authorization')
+        console.log('tokenRenew:',token)
         if (!token)
             return res.status(401).json({
-                ok: true,
+                
                 msg: "No hay token en la petición"
             })
 
+        
         const { uuid} = jwt.verify(token, process.env.JWT_SECRET)
         
         req.uuid = uuid
         next()
 
     } catch (error) {
+        console.log('No autorizado')
         return res.status(401).json({
-            ok: true,
+            ok: false,
             msg: 'Token no es válido'
         })
     }

@@ -5,7 +5,6 @@
     "database": "flexicom_soul",
     "host": "ganya.colombiahosting.com.co",
     "dialect": "mysql"
-    
   },
   "test": {
     "username": "root",
