@@ -9,9 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Soul_usuarios, Soul_v_pedido_pd }) {
-      this.belongsTo(Soul_usuarios, { foreignKey: 'id_usuario' })
-      this.hasMany(Soul_v_pedido_pd, { foreignKey: 'id_pedido' })
+    static associate({ Soul_usuarios, Soul_v_pedido_pd, Soul_pedidosdetalle, Soul_v_pedidos_p }) {
+      this.belongsTo(Soul_usuarios, { foreignKey: 'id_usuario', as: 'usuario' })
+      this.hasMany(Soul_v_pedido_pd, { foreignKey: 'id_pedido', as: 'pedidosPd' })
+      this.hasMany(Soul_pedidosdetalle, { foreignKey: 'id_pedido', as: 'pedidosDetalle' })
+      this.hasMany(Soul_v_pedidos_p, { foreignKey: 'id_pedido', as: 'pedidos' })
     }
   };
   Soul_pedidos.init({
@@ -55,15 +57,15 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0
     },
     valor: {
-      type: DataTypes.DECIMAL(15,2),
+      type: DataTypes.DECIMAL(15, 2),
       defaultValue: 0.00
     },
     descuentos: {
-      type: DataTypes.DECIMAL(15,2),
+      type: DataTypes.DECIMAL(15, 2),
       defaultValue: 0.00
     },
     total: {
-      type: DataTypes.DECIMAL(15,2),
+      type: DataTypes.DECIMAL(15, 2),
       defaultValue: 0.00
     },
     padre: {
@@ -71,7 +73,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 1
     },
     impuestos: {
-      type: DataTypes.DECIMAL(15,2),
+      type: DataTypes.DECIMAL(15, 2),
       defaultValue: 0.00
     }
   }, {

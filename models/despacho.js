@@ -9,11 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({Soul_v_pedidos_p, Soul_v_pedido_pd}) {
+    static associate({Soul_v_pedidos_p, Soul_v_pedido_pd, Soul_pedidosdetalle}) {
       // define association here
       // this.belongsTo(Soul_usuarios, { foreignKey: 'usuarioId', as: 'soul_usuario' })
       this.hasMany(Soul_v_pedidos_p, { foreignKey: 'id_despacho', as: 'pedidos' })
-      this.hasMany(Soul_v_pedido_pd, { foreignKey: 'id_despacho' })
+      this.hasMany(Soul_v_pedido_pd, { foreignKey: 'id_despacho', as: 'pedidosPd' })
+      this.hasMany(Soul_pedidosdetalle, { foreignKey: 'id_despacho', as: 'despachos' })
     }
 
     toJSON() {

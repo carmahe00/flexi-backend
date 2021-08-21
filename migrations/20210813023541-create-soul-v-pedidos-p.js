@@ -2,11 +2,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('soul_v_pedidos_p', {
-      
-      id_pedido: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
-      },
       id_turno: {
         type: Sequelize.INTEGER,
         defaultValue: 0

@@ -9,16 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Despacho }) {
+    static associate({ Despacho, Soul_pedidos }) {
       // define association here
       this.belongsTo(Despacho, { foreignKey: 'id_despacho', as: 'despacho' })
+      this.belongsTo(Soul_pedidos, { foreignKey: 'id_pedido', as:'pedido' })
     }
   };
   soul_v_pedidos_p.init({
-    id_pedido: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0
-    },
+
     id_turno: {
       type: DataTypes.INTEGER,
       defaultValue: 0

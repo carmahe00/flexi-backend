@@ -19,6 +19,6 @@
   "main": "app.js",
   "license": "MIT",
   "scripts": {
-    "server": "nodemon app"
+    "server": "nodemon server"
   }
 }

@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ Soul_pedidos }) {
       // this.hasMany(Despacho, { foreignKey: 'usuarioId', as: 'despachos' })
-      this.hasMany(Soul_pedidos, { foreignKey: 'id_usuario' })
+      this.hasMany(Soul_pedidos, { foreignKey: 'id_usuario',as: 'soul_pedidos' })
     }
 
     toJSON() {

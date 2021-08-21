@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getPedidos, getPedido } = require('../controllers/pedidosP');
+const { getPedidos, getAllDetailPedido, getDetalleDespachoPedido, changeState } = require('../controllers/pedidosP');
 const { validarJWT } = require('../middleware/validar-jwt');
 const { validarCampos } = require('../middleware/validar-campos');
 
@@ -10,9 +10,19 @@ router.get('/',[
     validarCampos
 ] ,getPedidos)
 
-router.get('/:date/:idDespacho',[
+router.get('/detalle',[
     validarJWT,
     validarCampos
-] ,getPedido)
+] ,getAllDetailPedido)
+
+router.get('/detalle/:idPedido/:idDespacho',[
+    validarJWT,
+    validarCampos
+] ,getDetalleDespachoPedido)
+
+router.put('/:idPedido/:idDespacho',[
+    validarJWT,
+    validarCampos
+] ,changeState)
 
 module.exports = router
