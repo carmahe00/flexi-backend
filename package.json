@@ -19,7 +19,7 @@
   "main": "app.js",
   "license": "MIT",
   "scripts": {
-    "start": "node server",
-    "server": "nodemon server"
+    "start": "node index",
+    "server": "nodemon index"
   }
 }
