@@ -3,15 +3,9 @@
     "username": "flexicom",
     "password": "Flexi_1234",
     "database": "flexicom_soul",
-    "host": "ganya.colombiahosting.com.co",
-    "dialect": "mysql",
-    "pool": {
-      "max": 15,
-      "min": 5,
-      "idle": 20000,
-      "evict": 15000,
-      "acquire": 30000
-    }
+    "host": "190.8.176.109",
+    "port":3306,
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
@@ -24,14 +18,8 @@
     "username": "flexicom",
     "password": "Flexi_1234",
     "database": "flexicom_soul",
-    "host": "ganya.colombiahosting.com.co",
-    "dialect": "mysql",
-    "pool": {
-      "max": 15,
-      "min": 5,
-      "idle": 20000,
-      "evict": 15000,
-      "acquire": 30000
-    }
+    "host": "190.8.176.109",
+    "port":3306,
+    "dialect": "mysql"
   }
 }
