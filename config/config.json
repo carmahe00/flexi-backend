@@ -1,11 +1,20 @@
 {
   "development": {
-    "username": "flexicom",
-    "password": "Flexi_1234",
+    "username": "flexicom_soul",
+    "password": "Flexi_2021",
     "database": "flexicom_soul",
-    "host": "190.8.176.109",
-    "port":3306,
-    "dialect": "mysql"
+    "host": "www.flexi.com.co",
+    "port": 3306,
+    "timeout": 60000,
+    "dialect": "mysql",
+    "pool": {
+      "max": 15,
+      "min": 5,
+      "idle": 20000,
+      "evict": 15000,
+      "acquire": 30000
+    },
+    "ssl": true
   },
   "test": {
     "username": "root",
@@ -15,11 +24,20 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "flexicom",
-    "password": "Flexi_1234",
+    "username": "flexicom_soul",
+    "password": "Flexi_2021",
     "database": "flexicom_soul",
-    "host": "190.8.176.109",
-    "port":3306,
-    "dialect": "mysql"
+    "host": "www.flexi.com.co",
+    "port": 3306,
+    "dialect": "mysql",
+    "timeout": 60000,
+    "pool": {
+      "max": 15,
+      "min": 5,
+      "idle": 20000,
+      "evict": 15000,
+      "acquire": 30000
+    },
+    "ssl": true
   }
 }
